@@ -18,7 +18,8 @@ class CreateContactsTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->text('message');
-            $table->string('file')->nullable();
+            $table->string('file_name')->nullable();
+            $table->string('file_link')->nullable();
             $table->timestamps();
         });
     }

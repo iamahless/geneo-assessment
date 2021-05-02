@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string|null
      */
-    // protected $namespace = 'App\\Http\\Controllers';
+    protected $namespace = 'App\\Http\\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -58,6 +58,18 @@ class RouteServiceProvider extends ServiceProvider
     {
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+        });
+
+        /**
+         * If the same user has used the form in the last 5 minutes,
+         * display a message telling them to wait before they can send a new message.
+         */
+        RateLimiter::for('contact', function (Request $request) {
+            return Limit::perMinutes(5, 1)
+                ->by(optional($request->user())->id ?: $request->ip())
+                ->response(function () {
+                    return redirect()->route('contact.index')->withError('Please wait for 5 minutes before trying again');
+                });
         });
     }
 }

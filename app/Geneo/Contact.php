@@ -44,7 +44,7 @@ class Contact
     public static function fileUpload($attachment): array
     {
         $name = $attachment->getClientOriginalName();
-        $path = $attachment->storePublicly('public/contact/attachments');
+        $path = $attachment->storePublicly('uploads');
         $link = config('app.url') . Storage::url($path);
 
         return [

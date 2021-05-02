@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\{App, Route, URL};
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+if (App::environment('production')) {
+    URL::forceScheme('https');
+    URL::forceRootUrl(env('APP_URL'));
+};
 
 Route::group(['as' => 'contact.'], function () {
     Route::get('/', 'ContactController@index')->name('index');

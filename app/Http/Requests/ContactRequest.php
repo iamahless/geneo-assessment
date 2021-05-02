@@ -11,9 +11,9 @@ class ContactRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,10 +21,13 @@ class ContactRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            //
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+            'message' => 'required',
+            'attachment' => 'nullable|mimes:pdf,xlsx,csv|max:5048'
         ];
     }
 }

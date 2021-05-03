@@ -29,4 +29,4 @@ A user can't use the form until 5 minutes has elapsed after submission this is s
 
 ## Note
 
--   File uploads are inside the `storage/app/uploads` directory
+-   File uploads are inside the `storage/app/public/contact-attachment` directory

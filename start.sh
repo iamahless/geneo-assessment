@@ -9,5 +9,5 @@ fi
 
 chmod -R 775 $PWD/storage
 
-docker run -d --restart=always -p 50505:8080 \
+docker run -d --restart=always -p 50505:80 \
     --name=$app $app
